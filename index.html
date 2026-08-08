@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Abdullah Farouq | Developer Portfolio</title>
+<meta name="description" content="Abdullah Farouq — developer building real-time business systems.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* =========================================================
+     Original Hero Styling
+     ========================================================= */
+  .hero{padding:56px 20px 30px;text-align:center}
+  .hero-inner{max-width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:18px}
+  .hero-title{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:800;line-height:1.15;letter-spacing:-1px;background:linear-gradient(180deg,#fff 0%,#CBD5E1 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-title span{background:linear-gradient(135deg,#F59E0B 0%,#F97316 50%,#FB923C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-desc{font-size:1.05rem;color:var(--muted);max-width:600px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .stats{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+  .stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--gold-3)}
+  .stat span{color:var(--muted);font-size:.8rem}
+
+  /* =========================================================
+     iOS 26 Dark Glass Stacked Showcase (Apple Tracker)
+     ========================================================= */
+  .deck-section {
+    padding: 40px 20px 100px;
+    overflow: hidden;
+  }
+  
+  .deck-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .deck-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 30px;
+    perspective: 1200px;
+  }
+
+  @media (min-width: 900px) {
+    .deck-container {
+      display: block;
+      min-height: 820px;
+    }
+  }
+
+  .apple-card {
+    position: relative;
+    border-radius: 30px;
+    padding: 28px;
+    background: rgba(18, 24, 38, 0.65);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .apple-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(251, 191, 36, 0.18), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .apple-card:hover::before {
+    opacity: 1;
+  }
+
+  .apple-card:hover {
+    border-color: rgba(251, 191, 36, 0.5);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 0 0 25px rgba(245, 158, 11, 0.2);
+    z-index: 50 !important;
+  }
+
+  /* ترتيب متدرج مائل من أعلى اليمين إلى أسفل اليسار */
+  @media (min-width: 900px) {
+    .apple-card {
+      position: absolute;
+      width: 540px;
+      min-height: 380px;
+    }
+    .apple-card:nth-child(1) { top: 0px;   inset-inline-start: 400px; z-index: 6; }
+    .apple-card:nth-child(2) { top: 70px;  inset-inline-start: 320px; z-index: 5; }
+    .apple-card:nth-child(3) { top: 140px; inset-inline-start: 240px; z-index: 4; }
+    .apple-card:nth-child(4) { top: 210px; inset-inline-start: 160px; z-index: 3; }
+    .apple-card:nth-child(5) { top: 280px; inset-inline-start: 80px;  z-index: 2; }
+    .apple-card:nth-child(6) { top: 350px; inset-inline-start: 0px;   z-index: 1; }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    transform: translateZ(25px);
+  }
+
+  .card-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gold-3);
+    background: rgba(245, 158, 11, 0.12);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .card-body {
+    transform: translateZ(20px);
+  }
+
+  .card-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #ffffff;
+  }
+
+  .card-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .card-footer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateZ(30px);
+  }
+
+  .card-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--gold-3);
+  }
+
+  .stars-rating {
+    display: flex;
+    gap: 4px;
+    color: var(--gold-2);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .ios-input, .ios-textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-size: 0.85rem;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.25s;
+  }
+
+  .ios-input:focus, .ios-textarea:focus {
+    border-color: var(--gold-2);
+  }
+
+  .ios-btn {
+    align-self: flex-start;
+    padding: 8px 18px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--gold), var(--copper));
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  }
+
+  .private-badge {
+    font-size: 0.72rem;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+  }
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/><stop offset="50%" stop-color="#FBBF24"/><stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+    <linearGradient id="copperGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DC2626"/><stop offset="50%" stop-color="#F97316"/><stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <linearGradient id="bronzeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#92400E"/><stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur1"/>
+      <feMerge><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <g id="af-emblem" filter="url(#goldGlow)">
+      <path d="M 130 370 L 230 130 L 280 130 L 180 370 Z" fill="url(#goldGradient)"/>
+      <path d="M 230 130 L 370 130 L 345 180 L 275 180 L 275 225 L 340 225 L 320 270 L 275 270 L 275 370 L 230 370 Z" fill="url(#copperGradient)"/>
+      <path d="M 190 270 L 320 270 L 340 225 L 170 225 Z" fill="url(#bronzeGradient)" opacity="0.95"/>
+      <line x1="230" y1="130" x2="370" y2="130" stroke="#FFF9E6" stroke-width="2" opacity="0.7"/>
+      <line x1="170" y1="225" x2="340" y2="225" stroke="#FCD34D" stroke-width="2" opacity="0.8"/>
+      <line x1="130" y1="370" x2="180" y2="370" stroke="#FCD34D" stroke-width="2.5"/>
+      <line x1="230" y1="370" x2="275" y2="370" stroke="#FB923C" stroke-width="2.5"/>
+      <circle cx="230" cy="130" r="4" fill="#FFFFFF"/>
+      <circle cx="370" cy="130" r="4" fill="#FB923C"/>
+      <circle cx="130" cy="370" r="4" fill="#FCD34D"/>
+      <circle cx="340" cy="225" r="3" fill="#FCD34D"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="ambient-glow-1"></div>
+<div class="ambient-glow-2"></div>
+
+<nav class="nav">
+  <a href="index.html" class="brand"><img src="logo.svg" alt="Abdullah Farouq logo" width="32" height="32">Abdullah Farouq</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button class="lang-btn" id="langBtn">🌐 <span id="langLabel">EN</span></button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- Original Hero Section -->
+<section class="hero">
+  <div class="hero-inner reveal">
+    <h1 class="hero-title"><span data-i18n="hero_title_1">I build </span><span class="hero-span" data-i18n="hero_title_span">systems</span><span data-i18n="hero_title_2"> that solve real problems for businesses.</span></h1>
+    <p class="hero-desc" data-i18n="hero_desc">I build fully integrated, cloud-based management systems that seamlessly sync across multiple accounts, devices, and branches in real time—with advanced offline capability and high-performance UX.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="apple-glass-btn" data-i18n="hero_cta1">View my work</a>
+      <a href="#contact" class="ghost-btn" data-i18n="hero_cta2">Get in touch</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-i18n="stat1_n">2+</b><span data-i18n="stat1_l">Systems shipped</span></div>
+      <div class="stat"><b data-i18n="stat2_n">100%</b><span data-i18n="stat2_l">Live sync</span></div>
+      <div class="stat"><b data-i18n="stat3_n">Offline</b><span data-i18n="stat3_l">Works without internet</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Stacked Interactive Cards Section -->
+<section id="projects" class="deck-section">
+  <div class="deck-wrap">
+    <div class="eyebrow reveal" data-i18n="projects_eyebrow">My work</div>
+    <h2 class="section-title reveal" data-i18n="projects_title">Systems I've built</h2>
+    <p class="section-sub reveal" data-i18n="projects_sub">Real, complete systems I designed and developed from the ground up.</p>
+
+    <div class="deck-container" id="appleDeck">
+
+      <!-- 1. Profile Card -->
+      <div class="apple-card" onclick="window.location.href='#contact'">
+        <div class="card-header">
+          <span class="card-tag" data-i18n="card1_tag">Profile</span>
+          <div class="card-icon">👤</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Abdullah Farouq</h3>
+          <p class="card-desc" data-i18n="card1_bio">Developer focused on building reliable, real-time business systems.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link-btn" data-i18n="hero_cta2">Get in touch ➔</span>
+        </div>
+      </div>
+
+      <!-- 2. Jewelry Project Card -->
+      <a href="jewelry.html" class="apple-card">
+        <div class="card-header">
+          <span class="card-tag" data-i18n="card2_tag">Project 01</span>
+          <div class="card-icon">💎</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" data-i18n="card2_title">Jewelry Shop System</h3>
+          <p class="card-desc" data-i18n="card2_desc">Live-synced gold & silver shop management system.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link-btn"><span data-i18n="open_project">Open project</span> ➔</span>
+        </div>
+      </a>
+
+      <!-- 3. Roster App Card -->
+      <a href="roster.html" class="apple-card">
+        <div class="card-header">
+          <span class="card-tag" data-i18n="card3_tag">Project 02</span>
+          <div class="card-icon">🗓️</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" data-i18n="card3_title">Roster App</h3>
+          <p class="card-desc" data-i18n="card3_desc">Shift scheduling system for companies.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link-btn"><span data-i18n="open_project">Open project</span> ➔</span>
+        </div>
+      </a>
+
+      <!-- 4. Customer Reviews Card -->
+      <div class="apple-card" style="cursor: default;" onclick="event.stopPropagation();">
+        <div class="card-header">
+          <span class="card-tag">Reviews</span>
+          <div class="card-icon">⭐</div>
+        </div>
+        <div class="card-body">
+          <div class="stars-rating">★★★★★</div>
+          <h3 class="card-title" style="font-size: 1.1rem;">"Fast & Reliable Systems"</h3>
+          <p class="card-desc">"High performance management solutions with seamless real-time syncing and intuitive UI."</p>
+        </div>
+        <div class="card-footer">
+          <span style="font-size: 0.8rem; color: var(--gold-3);">5/5 Rated by Clients</span>
+        </div>
+      </div>
+
+      <!-- 5. User Suggestion / Comment -->
+      <div class="apple-card" style="cursor: default;" onclick="event.stopPropagation();">
+        <div class="card-header">
+          <span class="card-tag">Suggestions</span>
+          <div class="card-icon">💡</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" style="font-size: 1.1rem;">Share a Suggestion</h3>
+          <form class="card-form" onsubmit="handleSuggestion(event)">
+            <input type="email" class="ios-input" placeholder="Your Email (Required)" required>
+            <textarea class="ios-textarea" rows="2" placeholder="Write your suggestion..." required></textarea>
+            <button type="submit" class="ios-btn">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 6. Private Admin Messages -->
+      <div class="apple-card" style="cursor: default;" onclick="event.stopPropagation();">
+        <div class="card-header">
+          <span class="card-tag">Private Message</span>
+          <span class="private-badge">🔒 Admin Only</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" style="font-size: 1.1rem;">Contact Admin</h3>
+          <p class="card-desc" style="font-size: 0.78rem; margin-bottom: 6px;">Messages are confidential and sent directly to the owner.</p>
+          <form class="card-form" onsubmit="handlePrivateMsg(event)">
+            <input type="text" class="ios-input" placeholder="Full Name" required>
+            <input type="email" class="ios-input" placeholder="Email Address" required>
+            <textarea class="ios-textarea" rows="2" placeholder="Your Message..." required></textarea>
+            <button type="submit" class="ios-btn" style="background: linear-gradient(135deg, #0284c7, #2563eb);">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow reveal" data-i18n="contact_eyebrow">Get in touch</div>
+    <h2 class="section-title reveal" data-i18n="contact_cta_title">Ready to work together?</h2>
+    <div class="hero-actions reveal" style="justify-content:center;margin-top:18px">
+      <a class="apple-glass-btn" href="https://www.linkedin.com/in/abdullah-farouq" target="_blank" rel="noopener" data-i18n="contact_linkedin">LinkedIn</a>
+      <a class="ghost-btn" href="https://wa.me/201061947000" target="_blank" rel="noopener" data-i18n="contact_whatsapp">WhatsApp</a>
+      <a class="ghost-btn" href="mailto:Abdullah.farouq87@yahoo.com" data-i18n="contact_email">Email</a>
+    </div>
+  </div>
+</section>
+
+<footer><p>© <span id="year"></span> <span class="foot-brand">Abdullah Farouq</span>. <span data-i18n="footer_rights">All rights reserved.</span></p></footer>
+
+<script src="shared.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* =========================================================
+     Apple Interactive Mouse Tracker Engine (3D Look)
+     ========================================================= */
+  const cards = document.querySelectorAll('.apple-card');
+  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (window.matchMedia('(hover: hover)').matches && !isReduced) {
+    document.addEventListener('mousemove', (e) => {
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+
+        const deltaX = e.clientX - cardCenterX;
+        const deltaY = e.clientY - cardCenterY;
+        const distance = Math.hypot(deltaX, deltaY);
+
+        if (distance < 650) {
+          const maxRotation = 16;
+         const rotateX = Math.max(-maxRotation, Math.min(maxRotation, (-deltaY / 550) * maxRotation));
+         const rotateY = Math.max(-maxRotation, Math.min(maxRotation, (deltaX / 550) * maxRotation));
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          
+          const mx = ((e.clientX - rect.left) / rect.width) * 100;
+          const my = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mx', `${mx}%`);
+          card.style.setProperty('--my', `${my}%`);
+        } else {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        }
+      });
+    });
+  }
+
+  function handleSuggestion(e) {
+    e.preventDefault();
+    alert('Thank you! Your suggestion has been recorded.');
+    e.target.reset();
+  }
+
+  function handlePrivateMsg(e) {
+    e.preventDefault();
+    alert('Your private message has been sent directly to the site administrator.');
+    e.target.reset();
+  }
+</script>
+</body>
+</html>

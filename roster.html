@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Roster App | Abdullah Farouq</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .p-hero{padding:60px 20px 10px}
+  .p-hero .wrap{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .p-icon{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:rgba(245,158,11,.12);border:1px solid rgba(251,191,36,.3);font-size:1.9rem}
+  .p-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.6px}
+  .p-intro{color:var(--muted);max-width:760px;font-size:1rem}
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .feature-item{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:16px 18px}
+  .feature-item .check{color:var(--gold-3);font-weight:800;flex:none}
+  .feature-item p{color:var(--muted);font-size:.9rem}
+  .status-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:20px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#4ade80;font-weight:700;font-size:.85rem}
+  @media (max-width:768px){.feature-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#F59E0B"/><stop offset="50%" stop-color="#FBBF24"/><stop offset="100%" stop-color="#FCD34D"/></linearGradient>
+    <linearGradient id="copperGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#DC2626"/><stop offset="50%" stop-color="#F97316"/><stop offset="100%" stop-color="#FB923C"/></linearGradient>
+    <linearGradient id="bronzeGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#92400E"/><stop offset="100%" stop-color="#B45309"/></linearGradient>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5" result="blur1"/><feMerge><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <g id="af-emblem" filter="url(#goldGlow)">
+      <path d="M 130 370 L 230 130 L 280 130 L 180 370 Z" fill="url(#goldGradient)"/>
+      <path d="M 230 130 L 370 130 L 345 180 L 275 180 L 275 225 L 340 225 L 320 270 L 275 270 L 275 370 L 230 370 Z" fill="url(#copperGradient)"/>
+      <path d="M 190 270 L 320 270 L 340 225 L 170 225 Z" fill="url(#bronzeGradient)" opacity="0.95"/>
+      <line x1="230" y1="130" x2="370" y2="130" stroke="#FFF9E6" stroke-width="2" opacity="0.7"/>
+      <line x1="170" y1="225" x2="340" y2="225" stroke="#FCD34D" stroke-width="2" opacity="0.8"/>
+      <line x1="130" y1="370" x2="180" y2="370" stroke="#FCD34D" stroke-width="2.5"/>
+      <line x1="230" y1="370" x2="275" y2="370" stroke="#FB923C" stroke-width="2.5"/>
+      <circle cx="230" cy="130" r="4" fill="#FFFFFF"/><circle cx="370" cy="130" r="4" fill="#FB923C"/><circle cx="130" cy="370" r="4" fill="#FCD34D"/><circle cx="340" cy="225" r="3" fill="#FCD34D"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="ambient-glow-1"></div>
+<div class="ambient-glow-2"></div>
+
+<nav class="nav">
+  <a href="index.html" class="brand"><img src="logo.svg" alt="Abdullah Farouq logo" width="32" height="32">Abdullah Farouq</a>
+  <div class="nav-right">
+    <ul class="nav-links"><li><a href="index.html#projects" data-i18n="nav_projects">Projects</a></li><li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li></ul>
+    <div class="lang-switch"><button class="lang-btn" id="langBtn">🌐 <span id="langLabel">EN</span></button><div class="lang-menu" id="langMenu"></div></div>
+  </div>
+</nav>
+
+<section class="p-hero">
+  <div class="wrap reveal">
+    <a href="index.html" class="ghost-btn" style="padding:8px 18px;font-size:.82rem" data-i18n="back_home">← Back to home</a>
+    <div class="p-icon">🗓️</div>
+    <span class="eyebrow" data-i18n="r_tag" style="margin-bottom:0">Company Scheduling System</span>
+    <h1 class="p-title" data-i18n="r_title">Roster App</h1>
+    <p class="p-intro" data-i18n="r_intro">A system built to manage and schedule employee shifts for companies...</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="display:flex;flex-direction:column;gap:36px">
+    <div class="reveal">
+      <h2 class="section-title" data-i18n="r_features_title">Key features</h2>
+      <div class="feature-grid" style="margin-top:16px">
+        <div class="feature-item"><span class="check">✓</span><p data-i18n="r_f1"></p></div>
+        <div class="feature-item"><span class="check">✓</span><p data-i18n="r_f2"></p></div>
+        <div class="feature-item"><span class="check">✓</span><p data-i18n="r_f3"></p></div>
+        <div class="feature-item"><span class="check">✓</span><p data-i18n="r_f4"></p></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3 style="margin-bottom:12px" data-i18n="r_status_title">Status</h3>
+      <span class="status-badge">✔ <span data-i18n="r_status_note">Core scheduling functionality is complete.</span></span>
+    </div>
+  </div>
+</section>
+
+<footer><p>© <span id="year"></span> <span class="foot-brand">Abdullah Farouq</span>. <span data-i18n="footer_rights">All rights reserved.</span></p></footer>
+
+<script src="shared.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
