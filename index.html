@@ -377,9 +377,11 @@
         </div>
         <div class="card-body">
           <h3 class="card-title" style="font-size: 1.1rem;">Share a Suggestion</h3>
-          <form class="card-form" onsubmit="handleSuggestion(event)">
-            <input type="email" class="ios-input" placeholder="Your Email (Required)" required>
-            <textarea class="ios-textarea" rows="2" placeholder="Write your suggestion..." required></textarea>
+          <form class="card-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="9a3d03cd-f9d4-436d-96fc-2ef3dc49f1a7">
+            <input type="hidden" name="from_name" value="User Suggestion">
+            <input type="email" name="email" class="ios-input" placeholder="Your Email (Required)" required>
+            <textarea name="message" class="ios-textarea" rows="2" placeholder="Write your suggestion..." required></textarea>
             <button type="submit" class="ios-btn">Submit</button>
           </form>
         </div>
@@ -394,10 +396,12 @@
         <div class="card-body">
           <h3 class="card-title" style="font-size: 1.1rem;">Contact Admin</h3>
           <p class="card-desc" style="font-size: 0.78rem; margin-bottom: 6px;">Messages are confidential and sent directly to the owner.</p>
-          <form class="card-form" onsubmit="handlePrivateMsg(event)">
-            <input type="text" class="ios-input" placeholder="Full Name" required>
-            <input type="email" class="ios-input" placeholder="Email Address" required>
-            <textarea class="ios-textarea" rows="2" placeholder="Your Message..." required></textarea>
+          <form class="card-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="9a3d03cd-f9d4-436d-96fc-2ef3dc49f1a7">
+            <input type="hidden" name="from_name" value="Private Admin Message">
+            <input type="text" name="name" class="ios-input" placeholder="Full Name" required>
+            <input type="email" name="email" class="ios-input" placeholder="Email Address" required>
+            <textarea name="message" class="ios-textarea" rows="2" placeholder="Your Message..." required></textarea>
             <button type="submit" class="ios-btn" style="background: linear-gradient(135deg, #0284c7, #2563eb);">Send Message</button>
           </form>
         </div>
@@ -445,8 +449,8 @@
 
         if (distance < 650) {
           const maxRotation = 16;
-         const rotateX = Math.max(-maxRotation, Math.min(maxRotation, (-deltaY / 550) * maxRotation));
-         const rotateY = Math.max(-maxRotation, Math.min(maxRotation, (deltaX / 550) * maxRotation));
+          const rotateX = Math.max(-maxRotation, Math.min(maxRotation, (-deltaY / 550) * maxRotation));
+          const rotateY = Math.max(-maxRotation, Math.min(maxRotation, (deltaX / 550) * maxRotation));
 
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
           
@@ -459,18 +463,6 @@
         }
       });
     });
-  }
-
-  function handleSuggestion(e) {
-    e.preventDefault();
-    alert('Thank you! Your suggestion has been recorded.');
-    e.target.reset();
-  }
-
-  function handlePrivateMsg(e) {
-    e.preventDefault();
-    alert('Your private message has been sent directly to the site administrator.');
-    e.target.reset();
   }
 </script>
 </body>
