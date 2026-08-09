@@ -1,109 +1,115 @@
-/* ===== Internationalization System ===== */
+/* Language list: English default, Arabic second, then most-used world languages */
 const LANGS = [
-  { code: 'en', native: 'English', rtl: false },
-  { code: 'ar', native: 'العربية', rtl: true },
+  { code:'en', native:'English', rtl:false },
+  { code:'ar', native:'العربية', rtl:true },
+  
 ];
 
+/* Full translations for en + ar. Other languages fall back to English
+   for any key not present (keeps the site fully functional while a
+   native translation can be added later). */
 const T = {
   en: {
-    nav_projects: "Work", nav_contact: "Contact", nav_cta: "Get in touch",
-    role: "Systems Architecture & Development",
-    hero_title_1: "I architect ", hero_title_span: "resilient systems", hero_title_2: " that scale with your business.",
-    hero_desc: "Enterprise-grade management solutions with real-time synchronization, advanced offline capabilities, and optimized performance across all platforms.",
-    hero_cta1: "View portfolio", hero_cta2: "Get in touch",
-    stat1_n: "Enterprise", stat1_l: "Grade Architecture",
-    stat2_n: "100%", stat2_l: "Real-time Sync",
-    stat3_n: "Offline", stat3_l: "Always Available",
-    card1_tag: "Profile", card1_title: "About",
-    card1_bio: "Systems architect with expertise in designing and implementing scalable, real-time business solutions. Specializing in cross-platform development with offline-first capabilities and high-performance UX patterns.",
-    card2_tag: "Solution 01", card2_title: "Jewelry Management System", card2_desc: "Synchronized inventory and point-of-sale operations for a gold & silver shop.",
-    card3_tag: "Solution 02", card3_title: "Workforce Scheduling", card3_desc: "Centralized shift management and team coordination.",
-    open_project: "View solution",
-    contact_title: "Let's work together", contact_sub: "Tap any option to connect.",
-    contact_phone: "Phone", contact_whatsapp: "WhatsApp", contact_email: "Email", contact_linkedin: "LinkedIn",
-    projects_eyebrow: "Portfolio", projects_title: "Solutions Delivered", projects_sub: "Production systems built with enterprise standards and scalability in mind.",
-    contact_eyebrow: "Get in touch", contact_cta_title: "Ready to build something great?",
-    back_home: "Back to home",
-    footer_rights: "All rights reserved.",
-    j_tag: "Jewelry Shop Management", j_title: "Jewelry Management System",
-    j_intro: "Complete management platform for a gold & silver jewelry shop, including inventory tracking, point-of-sale, vault management, and comprehensive reporting. Deployed as web application and desktop clients (Windows) with real-time data synchronization across all devices and approved accounts.",
-    j_core_title: "Core Architecture",
-    j_core: "Multi-user environment enabling simultaneous operations across devices. Changes propagate in real-time with automatic offline queuing and background sync upon reconnection.",
-    j_features_title: "Key Capabilities",
-    j_f1: "Real-time sync across all devices via Firestore infrastructure",
-    j_f2: "Account authorization system with developer-controlled access management",
-    j_f3: "Live analytics dashboard with sales metrics, inventory status, and activity feeds",
-    j_f4: "Automated pricing formulas with flexible manual override capabilities",
-    j_f5: "Multi-method payment processing including partial payments and credit operations",
-    j_f6: "Complete offline functionality with automatic sync on connection restoration",
-    j_f7: "Barcode scanning and label generation system",
-    j_f8: "Advanced features: layaway, credit accounts, damage tracking, transaction history",
-    j_f9: "Administrative controls with selective data management and access auditing",
-    j_f10: "Native desktop application (EXE) with feature parity to web version",
-    j_status_title: "Status", j_status_note: "Core systems deployed and operational.",
-    r_tag: "Workforce Scheduling", r_title: "Workforce Management System",
-    r_intro: "Centralized platform for managing employee schedules, team coordination, and shift operations. Designed to eliminate scheduling conflicts and provide visibility across all workforce activities.",
-    r_features_title: "Key Capabilities",
-    r_f1: "Unified shift scheduling and team management interface",
-    r_f2: "Real-time visibility of staffing across operational periods",
-    r_f3: "Built on same real-time sync infrastructure as enterprise systems",
-    r_f4: "Extensible architecture ready for roles, permissions, and advanced reporting",
-    r_status_title: "Status", r_status_note: "Core scheduling infrastructure complete with modular expansion options.",
+    nav_projects:"Projects", nav_contact:"Contact", nav_cta:"Get in touch",
+    role:"Builder of Systems & Apps",
+    hero_title_1:"I build ", hero_title_span:"systems", hero_title_2:" that solve real problems for businesses.",
+    hero_desc: "I build fully integrated, cloud-based management systems that seamlessly sync across multiple accounts, devices, and branches in real time—with advanced offline capability and high-performance UX.",
+    hero_cta1:"View my work", hero_cta2:"Get in touch",
+    stat1_n:"2+", stat1_l:"Systems shipped",
+    stat2_n:"100%", stat2_l:"Live sync",
+    stat3_n:"Offline", stat3_l:"Works without internet",
+    card1_tag:"Profile", card1_title:"About me",
+    card1_bio:"Developer focused on building reliable, real-time business systems — from point-of-sale and inventory tools to scheduling apps — with an emphasis on offline resilience and clean UI.",
+    card2_tag:"Project 01", card2_title:"Jewelry Shop System", card2_desc:"Live-synced gold & silver shop management system.",
+    card3_tag:"Project 02", card3_title:"Roster App", card3_desc:"Shift scheduling system for companies.",
+    open_project:"Open project",
+    contact_title:"Ways to reach me", contact_sub:"Tap any option to connect directly.",
+    contact_phone:"Phone", contact_whatsapp:"WhatsApp", contact_email:"Email", contact_linkedin:"LinkedIn",
+    projects_eyebrow:"My work", projects_title:"Systems I've built", projects_sub:"Real, complete systems I designed and developed from the ground up.",
+    contact_eyebrow:"Get in touch", contact_cta_title:"Ready to work together?",
+    back_home:"Back to home",
+    footer_rights:"All rights reserved.",
+    /* Jewelry project page */
+    j_tag:"Shop Management System", j_title:"Hassan Nassar Jewelry Management System",
+    j_intro:"A complete management system for a jewelry shop (gold and silver), covering everything from adding an item to inventory, through selling it on an invoice, to its movement in the vault, and finally reporting. The system runs directly in the browser or as an installed desktop app (Windows), with all shop data synced live across every device and approved account.",
+    j_core_title:"Core idea",
+    j_core:"The shop owner and staff (e.g. the accountant) can work on the same data at the same time, from any device — computer or phone — and any action taken by one appears instantly for the others.",
+    j_features_title:"Key features",
+    j_f1:"Live sync across every account and device via Firestore",
+    j_f2:"Approval system: every new account is reviewed by the developer before it can access the system",
+    j_f3:"Live dashboard with today's sales, vault balance, inventory weight, and a live activity feed",
+    j_f4:"Automatic gold pricing formula based on karat 21, plus fully independent manual pricing for silver (999 / 925 / 800)",
+    j_f5:"Invoices support every payment method, including old gold/silver buy-back as part of payment",
+    j_f6:"Works fully offline, with automatic upload once the connection returns — no manual step required",
+    j_f7:"Camera-based barcode scanning and printable barcode labels",
+    j_f8:"Layaway, old-metal buy-back, repairs, returns, credit accounts, expenses, and workshop-loss tracking",
+    j_f9:"Developer section with selective data wipe and full device/account access control",
+    j_f10:"Ready desktop app (EXE) with the same live-sync functionality",
+    j_status_title:"Status", j_status_note:"All core modules are complete and shipped.",
+    /* Roster project page */
+    r_tag:"Company Scheduling System", r_title:"Roster App",
+    r_intro:"A system built to manage and schedule employee shifts for companies — designed to organize teams and shifts and reduce scheduling conflicts through a single, clear, central interface.",
+    r_features_title:"Key features",
+    r_f1:"Manage shift schedules and teams in one central place",
+    r_f2:"A clear overview of staff distribution across shifts",
+    r_f3:"Built on the same reliability and live-sync philosophy as my other systems",
+    r_f4:"Extensible design — ready to add roles, permissions, and reporting as a company's needs grow",
+    r_status_title:"Status", r_status_note:"Core scheduling functionality is complete; extra modules can be added on request.",
   },
   ar: {
-    nav_projects: "المحفظة", nav_contact: "تواصل", nav_cta: "تواصل معنا",
-    role: "معماري أنظمة وتطوير",
-    hero_title_1: "أبني ", hero_title_span: "أنظمة موثوقة", hero_title_2: " تنمو مع عملك.",
-    hero_desc: "حلول إدارة احترافية بمواصفات مؤسسية مع مزامنة فورية وقدرات عمل بدون اتصال وأداء محسّن على كل الأنظمة.",
-    hero_cta1: "شوف أعمالي", hero_cta2: "تواصل معايا",
-    stat1_n: "مؤسسي", stat1_l: "معايير احترافية",
-    stat2_n: "100%", stat2_l: "مزامنة فورية",
-    stat3_n: "بدون نت", stat3_l: "متاح دائماً",
-    card1_tag: "البروفايل", card1_title: "عني",
-    card1_bio: "معماري أنظمة متخصص في تصميم وتنفيذ حلول أعمال قابلة للتوسع والعمل بالوقت الفعلي. خبرة في التطوير متعدد الأنظمة مع قدرات العمل بدون اتصال وأنماط واجهة مستخدم عالية الأداء.",
-    card2_tag: "حل 01", card2_title: "نظام إدارة محل مجوهرات", card2_desc: "عمليات المخزون ونقاط البيع المتزامنة لمحل دهب وفضة.",
-    card3_tag: "حل 02", card3_title: "نظام جدولة الموظفين", card3_desc: "إدارة مركزية للورديات والفرق.",
-    open_project: "شوف الحل",
-    contact_title: "لنعمل معاً", contact_sub: "دوس على أي خيار عشان تتواصل.",
-    contact_phone: "التليفون", contact_whatsapp: "واتساب", contact_email: "الإيميل", contact_linkedin: "لينكدإن",
-    projects_eyebrow: "المحفظة", projects_title: "الحلول المُطبّقة", projects_sub: "أنظمة إنتاجية مبنية بمعايير مؤسسية وقابلة للتوسع.",
-    contact_eyebrow: "تواصل معايا", contact_cta_title: "جاهز نبني حاجة عظيمة؟",
-    back_home: "رجوع للرئيسية",
-    footer_rights: "كل الحقوق محفوظة.",
-    j_tag: "إدارة محل مجوهرات", j_title: "نظام إدارة محل مجوهرات",
-    j_intro: "منصة إدارة شاملة لمحل مجوهرات (دهب وفضة) تشمل تتبع المخزون ونقاط البيع وإدارة الخزنة والتقارير الشاملة. مطبّق كتطبيق ويب وعملاء سطح المكتب (Windows) مع مزامنة بيانات فورية عبر جميع الأجهزة والحسابات المصرح لها.",
-    j_core_title: "البنية الأساسية",
-    j_core: "بيئة متعددة المستخدمين تمكّن العمليات المتزامنة عبر الأجهزة. التغييرات تنتشر فوراً مع إدراج تلقائي للعمليات بدون اتصال والمزامنة الخلفية عند استعادة الاتصال.",
-    j_features_title: "القدرات الرئيسية",
-    j_f1: "مزامنة فورية عبر جميع الأجهزة عبر بنية Firestore",
-    j_f2: "نظام تفويض الحسابات مع إدارة الوصول يتحكم فيها المطور",
-    j_f3: "لوحة تحليلات حية مع مقاييس المبيعات وحالة المخزون وسجلات النشاط",
-    j_f4: "معادلات تسعير تلقائية مع إمكانية التعطيل اليدوي المرن",
-    j_f5: "معالجة الدفع متعددة الطرق بما فيها الدفعات الجزئية والعمليات الآجلة",
-    j_f6: "وظائف كاملة بدون اتصال مع المزامنة التلقائية عند استعادة الاتصال",
-    j_f7: "نظام قراءة الباركود وإنشاء الملصقات",
-    j_f8: "ميزات متقدمة: الحجز والحسابات الآجلة وتتبع الأضرار والسجل الكامل",
-    j_f9: "عناصر تحكم إدارية مع إدارة البيانات الانتقائية وتدقيق الوصول",
-    j_f10: "تطبيق سطح مكتب أصلي (EXE) بميزات متطابقة مع الإصدار الويب",
-    j_status_title: "الحالة", j_status_note: "الأنظمة الأساسية مطبّقة وتعمل.",
-    r_tag: "جدولة الموظفين", r_title: "نظام إدارة الموظفين",
-    r_intro: "منصة مركزية لإدارة جداول الموظفين وتنسيق الفرق وعمليات الورديات. مصممة للقضاء على تعارضات الجدولة وتوفير رؤية شاملة لجميع أنشطة القوى العاملة.",
-    r_features_title: "القدرات الرئيسية",
-    r_f1: "واجهة موحدة لجدولة الورديات وإدارة الفرق",
-    r_f2: "رؤية فورية لتوزيع الموظفين عبر الفترات التشغيلية",
-    r_f3: "مبني على نفس بنية المزامنة الفورية مثل الأنظمة المؤسسية",
-    r_f4: "بنية قابلة للتوسع جاهزة للأدوار والصلاحيات والتقارير المتقدمة",
-    r_status_title: "الحالة", r_status_note: "بنية الجدولة الأساسية مكتملة مع خيارات التوسع المعياري.",
+    nav_projects:"مشاريعي", nav_contact:"تواصل", nav_cta:"تواصل الآن",
+    role:"مطوّر أنظمة وتطبيقات",
+    hero_title_1:"أبني ", hero_title_span:"أنظمة", hero_title_2:" تحل مشاكل حقيقية للشركات والمحلات.",
+    hero_desc: "أبني أنظمة إدارة ومتاجر سحابية متكاملة ومترابطة بالكامل، تعمل بسلاسة عبر متعدد الحسابات والفروع مع مزامنة لحظية بين كافة الأجهزة، ودعم متطور للعمل بدون إنترنت لضمان استقرار العمليات وتجربة مستخدم سلسة وعالية الأداء.",
+    hero_cta1:"شوف أعمالي", hero_cta2:"تواصل معايا",
+    stat1_n:"2+", stat1_l:"أنظمة منشورة",
+    stat2_n:"100%", stat2_l:"مزامنة لحظية",
+    stat3_n:"Offline", stat3_l:"يعمل بدون نت",
+    card1_tag:"البروفايل", card1_title:"نبذة عني",
+    card1_bio:"مطوّر مهتم ببناء أنظمة أعمال موثوقة وفي الوقت الحقيقي — من أنظمة نقاط البيع والمخزون لتطبيقات الجدولة — مع تركيز على العمل بدون إنترنت وواجهة نظيفة.",
+    card2_tag:"مشروع 01", card2_title:"نظام محل مجوهرات", card2_desc:"نظام إدارة محل ذهب وفضة بمزامنة لحظية.",
+    card3_tag:"مشروع 02", card3_title:"تطبيق روستر", card3_desc:"نظام جدولة ورديات للشركات.",
+    open_project:"افتح المشروع",
+    contact_title:"طرق التواصل معايا", contact_sub:"دوس على أي خيار عشان تتواصل على طول.",
+    contact_phone:"التليفون", contact_whatsapp:"واتساب", contact_email:"الإيميل", contact_linkedin:"لينكدإن",
+    projects_eyebrow:"مشاريعي", projects_title:"أنظمة عملتها", projects_sub:"نماذج فعلية لأنظمة كاملة قمت بتصميمها وتطويرها من الصفر.",
+    contact_eyebrow:"تواصل معايا", contact_cta_title:"جاهز نتعاون على مشروعك؟",
+    back_home:"العودة للرئيسية",
+    footer_rights:"كل الحقوق محفوظة.",
+    j_tag:"نظام إدارة محل", j_title:"نظام إدارة مجوهرات حسن نصار",
+    j_intro:"نظام متكامل لإدارة محلات الذهب والفضة، يغطي كل حاجة من إضافة الصنف للمخزون، لحظة بيعه في فاتورة، لحركته في الخزنة، وأخيرًا التقارير. الموقع يعمل مباشرة من المتصفح أو كبرنامج مثبّت على سطح المكتب (Windows)، مع مزامنة لحظية لكل بيانات المحل بين كل الأجهزة والحسابات المصرح لها.",
+    j_core_title:"الفكرة الأساسية",
+    j_core:"صاحب المحل والموظفين (زي المحاسب) يقدروا يشتغلوا على نفس البيانات في نفس اللحظة، من أي جهاز — كمبيوتر أو موبايل — وأي عملية يعملها حد تظهر فورًا للباقي.",
+    j_features_title:"أهم المميزات",
+    j_f1:"مزامنة لحظية بين كل الحسابات والأجهزة عبر Firestore",
+    j_f2:"نظام موافقة: أي حساب جديد يراجعه المطور قبل ما يقدر يدخل النظام",
+    j_f3:"لوحة تحكم حية بمبيعات اليوم، رصيد الخزنة، وزن المخزون، وسجل عمليات لحظي",
+    j_f4:"معادلة تسعير تلقائية للذهب على أساس عيار 21، مع تسعير يدوي مستقل تمامًا للفضة (999 / 925 / 800)",
+    j_f5:"الفواتير بتدعم كل طرق الدفع، بما فيها تقييم كسر الذهب/الفضة القديم كجزء من السداد",
+    j_f6:"يعمل بالكامل بدون إنترنت، مع رفع تلقائي للبيانات فور عودة الاتصال — من غير أي خطوة يدوية",
+    j_f7:"قراءة باركود بالكاميرا مباشرة، وطباعة ملصقات باركود",
+    j_f8:"حجز، كسر معدن قديم، تصليح، مرتجعات، حسابات آجلة، مصروفات، وتتبع الفاقد بالورشة",
+    j_f9:"قسم مطور بحسم بيانات اختياري وتحكم كامل في الحسابات والأجهزة",
+    j_f10:"نسخة برنامج سطح مكتب (EXE) جاهزة بنفس كل المميزات",
+    j_status_title:"الحالة", j_status_note:"كل الوحدات الأساسية مكتملة وشغالة.",
+    r_tag:"نظام جدولة للشركات", r_title:"تطبيق روستر",
+    r_intro:"نظام لإدارة وجدولة مناوبات الموظفين للشركات — مصمم عشان ينظّم الفرق والورديات ويقلل التعارض في الجداول من خلال واجهة مركزية واضحة.",
+    r_features_title:"أهم المميزات",
+    r_f1:"إدارة جداول الورديات والفرق في مكان واحد",
+    r_f2:"رؤية واضحة وسريعة لتوزيع الموظفين على الورديات",
+    r_f3:"مبني بنفس فلسفة الموثوقية والمزامنة اللحظية زي باقي أنظمتي",
+    r_f4:"تصميم قابل للتوسع — جاهز لإضافة صلاحيات وتقارير حسب احتياج الشركة",
+    r_status_title:"الحالة", r_status_note:"الوظيفة الأساسية للجدولة مكتملة، ويمكن إضافة وحدات إضافية حسب الطلب.",
   }
 };
 
-function t(key) {
+function t(key){
   const lang = localStorage.getItem('af_lang') || 'en';
   const dict = T[lang] || T.en;
   return dict[key] !== undefined ? dict[key] : (T.en[key] || '');
 }
 
-function applyTranslations() {
+function applyTranslations(){
   const lang = localStorage.getItem('af_lang') || 'en';
   const meta = LANGS.find(l => l.code === lang) || LANGS[0];
   document.documentElement.lang = lang;
@@ -120,7 +126,7 @@ function applyTranslations() {
   });
 }
 
-function buildLangMenu() {
+function buildLangMenu(){
   const menu = document.getElementById('langMenu');
   if (!menu) return;
   const current = localStorage.getItem('af_lang') || 'en';
@@ -140,27 +146,27 @@ function buildLangMenu() {
     menu.appendChild(b);
   });
   const label = document.getElementById('langLabel');
-  if (label) {
+  if (label){
     const meta = LANGS.find(l => l.code === current) || LANGS[0];
     label.textContent = meta.code.toUpperCase();
   }
 }
 
-function initLangSwitcher() {
+function initLangSwitcher(){
   buildLangMenu();
   const btn = document.getElementById('langBtn');
   const menu = document.getElementById('langMenu');
-  if (btn && menu) {
+  if (btn && menu){
     btn.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('open'); });
     document.addEventListener('click', () => menu.classList.remove('open'));
   }
   applyTranslations();
 }
 
-/* ===== Reveal on Scroll Animation ===== */
-function initReveal() {
+/* Reveal-on-scroll used across pages */
+function initReveal(){
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
+  if (prefersReduced){
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
     return;
   }
@@ -173,160 +179,20 @@ function initReveal() {
   });
 }
 
-/* ===== Apple Card 3D Mouse Tracking ===== */
-function initAppleCardTracker() {
-  const cards = document.querySelectorAll('.apple-card');
-  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (window.matchMedia('(hover: hover)').matches && !isReduced) {
-    document.addEventListener('mousemove', (e) => {
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenterX = rect.left + rect.width / 2;
-        const cardCenterY = rect.top + rect.height / 2;
-
-        const deltaX = e.clientX - cardCenterX;
-        const deltaY = e.clientY - cardCenterY;
-        const distance = Math.hypot(deltaX, deltaY);
-
-        if (distance < 650) {
-          const maxRotation = 16;
-          const rotateX = Math.max(-maxRotation, Math.min(maxRotation, (-deltaY / 550) * maxRotation));
-          const rotateY = Math.max(-maxRotation, Math.min(maxRotation, (deltaX / 550) * maxRotation));
-
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-          
-          const mx = ((e.clientX - rect.left) / rect.width) * 100;
-          const my = ((e.clientY - rect.top) / rect.height) * 100;
-          card.style.setProperty('--mx', `${mx}%`);
-          card.style.setProperty('--my', `${my}%`);
-        } else {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        }
-      });
-    });
-  }
+/* Nav gets a denser glass background + shadow once the page scrolls */
+function initNavScroll(){
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const onScroll = () => {
+    if (window.scrollY > 12) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-/* ===== Review Management System ===== */
-const ReviewManager = {
-  storageKey: 'pending_reviews',
-  
-  addReview(name, email, rating, comment) {
-    const reviews = this.getPendingReviews();
-    const review = {
-      id: Date.now(),
-      name,
-      email,
-      rating: Math.min(5, Math.max(1, parseInt(rating) || 5)),
-      comment,
-      timestamp: new Date().toISOString(),
-      approved: false
-    };
-    reviews.push(review);
-    localStorage.setItem(this.storageKey, JSON.stringify(reviews));
-    return review;
-  },
-  
-  getPendingReviews() {
-    try {
-      return JSON.parse(localStorage.getItem(this.storageKey)) || [];
-    } catch {
-      return [];
-    }
-  },
-  
-  getApprovedReviews() {
-    return this.getPendingReviews().filter(r => r.approved);
-  },
-  
-  approveReview(id) {
-    const reviews = this.getPendingReviews();
-    const review = reviews.find(r => r.id === id);
-    if (review) {
-      review.approved = true;
-      localStorage.setItem(this.storageKey, JSON.stringify(reviews));
-    }
-  },
-  
-  rejectReview(id) {
-    const reviews = this.getPendingReviews().filter(r => r.id !== id);
-    localStorage.setItem(this.storageKey, JSON.stringify(reviews));
-  }
-};
-
-/* ===== Offline Capability Detection & Management ===== */
-const OfflineManager = {
-  isOnline: navigator.onLine,
-  
-  init() {
-    window.addEventListener('online', () => this.setStatus(true));
-    window.addEventListener('offline', () => this.setStatus(false));
-    this.updateUI();
-  },
-  
-  setStatus(online) {
-    this.isOnline = online;
-    this.updateUI();
-  },
-  
-  updateUI() {
-    if (this.isOnline) {
-      document.body.classList.remove('offline-mode');
-    } else {
-      document.body.classList.add('offline-mode');
-    }
-  }
-};
-
-/* ===== Service Worker Registration for PWA ===== */
-function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {
-      // Service worker registration failed or not available
-    });
-  }
-}
-
-/* ===== Performance Monitoring ===== */
-const PerformanceMonitor = {
-  metrics: {},
-  
-  mark(name) {
-    performance.mark(name);
-  },
-  
-  measure(name, startMark, endMark) {
-    try {
-      performance.measure(name, startMark, endMark);
-      const measure = performance.getEntriesByName(name)[0];
-      this.metrics[name] = measure.duration;
-    } catch (e) {
-      // Measurement failed
-    }
-  },
-  
-  logMetrics() {
-    if (Object.keys(this.metrics).length > 0) {
-      console.log('[Performance Metrics]', this.metrics);
-    }
-  }
-};
-
-/* ===== Initialization ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitcher();
   initReveal();
-  initAppleCardTracker();
-  OfflineManager.init();
-  registerServiceWorker();
-  
-  document.getElementById('year').textContent = new Date().getFullYear();
-  
-  PerformanceMonitor.mark('app-ready');
-});
-
-/* Cleanup on unload */
-window.addEventListener('beforeunload', () => {
-  PerformanceMonitor.logMetrics();
+  initNavScroll();
 });
