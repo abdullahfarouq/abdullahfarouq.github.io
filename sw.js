@@ -5,10 +5,9 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/shared.css',
   '/shared.js',
-  '/logo.svg',
+  '/Logo_3.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
 ];
-
 // Install event
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -21,7 +20,6 @@ self.addEventListener('install', (event) => {
   );
   self.skipWaiting();
 });
-
 // Activate event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
@@ -35,32 +33,26 @@ self.addEventListener('activate', (event) => {
   );
   self.clients.claim();
 });
-
 // Fetch event - Cache first, then network
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') {
     return;
   }
-
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
         return response;
       }
-
       return fetch(event.request).then((response) => {
         // Don't cache non-200 responses or external APIs
         if (!response || response.status !== 200 || response.type === 'basic' && response.url.includes('api.web3forms.com')) {
           return response;
         }
-
         // Clone the response
         const responseToCache = response.clone();
-
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
         });
-
         return response;
       }).catch(() => {
         // Return cached version or offline page
@@ -79,7 +71,6 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
 // Background sync for deferred requests
 self.addEventListener('sync', (event) => {
   if (event.tag === 'sync-forms') {
@@ -87,27 +78,24 @@ self.addEventListener('sync', (event) => {
       // Attempt to send any pending form submissions
       self.registration.showNotification('Group', {
         body: 'Syncing your data...',
-        badge: '/logo.svg'
+        badge: '/Logo_3.png'
       }).catch(() => {})
     );
   }
 });
-
 // Push notifications
 self.addEventListener('push', (event) => {
   const data = event.data ? event.data.json() : {};
   const options = {
     body: data.body || 'New message from Group',
-    badge: '/logo.svg',
-    icon: '/logo.svg',
+    badge: '/Logo_3.png',
+    icon: '/Logo_3.png',
     vibrate: [100, 50, 100],
   };
-
   event.waitUntil(
     self.registration.showNotification(data.title || 'Group', options)
   );
 });
-
 // Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
