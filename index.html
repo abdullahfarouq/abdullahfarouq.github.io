@@ -1,40 +1,834 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Enterprise systems architecture and development. Real-time solutions with offline capabilities.">
-  <meta name="theme-color" content="#0F172A">
-  <title>GROUP — Systems Architecture & Development</title>
-  <link rel="icon" type="image/svg+xml" href="logo.svg">
-  <link rel="apple-touch-icon" href="logo.svg">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shared.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AF LOGIC | Digital Architecture</title>
+    <!-- Lucide Icons Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* --------------------------------------------------
+           1. DESIGN SYSTEM & LUXURY DARK THEME VARIABLES
+        -------------------------------------------------- */
+        :root {
+            --bg-dark: #050505;
+            --liquid-glass: rgba(24, 24, 28, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shine: rgba(255, 255, 255, 0.15);
+            
+            --cream: #F5F5F7;
+            --muted: #8E8E93;
+            --cyber-blue: #0A84FF;
+            --blue-glow: rgba(10, 132, 255, 0.85);
+            --neon-red: #FF2E2E;
+            --red-glow: rgba(255, 46, 46, 0.85);
+            
+            --font-en: 'Verdana Pro', 'Verdana', sans-serif;
+            --font-ar: 'Arial', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(10, 132, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 46, 46, 0.05) 0%, transparent 50%);
+            color: var(--cream);
+            font-family: var(--font-en);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        [dir="rtl"] body {
+            font-family: var(--font-ar);
+        }
+
+        /* --------------------------------------------------
+           2. SPLASH SCREEN (2 SECONDS)
+        -------------------------------------------------- */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background: #050505;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            opacity: 1;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #splash-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-center {
+            margin: auto;
+            text-align: center;
+        }
+
+        .splash-logo {
+            width: 340px;
+            max-width: 70vw;
+            height: auto;
+            opacity: 0;
+            transform: scale(0.3);
+            animation: emergeLogo 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            filter: drop-shadow(0 0 30px var(--blue-glow));
+        }
+
+        @keyframes emergeLogo {
+            0% { opacity: 0; transform: scale(0.3); filter: blur(15px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        .splash-title-en {
+            font-family: var(--font-en);
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 26px;
+            color: var(--cream);
+            display: block;
+            opacity: 0;
+            animation: fadeInTitle 1s ease 0.9s forwards;
+        }
+
+        @keyframes fadeInTitle {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .splash-title-ar {
+            font-family: var(--font-ar);
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 25px;
+            color: var(--cream);
+            display: none;
+        }
+
+        [dir="rtl"] .splash-title-en { display: none; }
+        [dir="rtl"] .splash-title-ar { display: block; }
+
+        .splash-footer-text {
+            font-family: var(--font-en);
+            font-size: 14px;
+            color: var(--muted);
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.5;
+        }
+
+        /* --------------------------------------------------
+           3. HEADER & NAVIGATION
+        -------------------------------------------------- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo-img {
+            height: 60px;
+            width: auto;
+        }
+
+        @media (max-width: 900px) {
+            .brand-logo-img {
+                height: 46px;
+            }
+        }
+
+        .brand-text {
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyber-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .interactive-btn {
+            background: var(--liquid-glass);
+            border: 1px solid var(--glass-border);
+            color: var(--cream);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            backdrop-filter: blur(25px);
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, background 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .interactive-btn:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 20px var(--blue-glow);
+        }
+
+        .interactive-btn:active {
+            transform: scale(0.96) !important;
+        }
+
+        .cta-btn {
+            background: var(--cream);
+            color: #000;
+            border: none;
+        }
+
+        .cta-btn:hover {
+            background: var(--cyber-blue);
+            color: #fff;
+        }
+
+        /* --------------------------------------------------
+           4. HERO SECTION
+        -------------------------------------------------- */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero-logo {
+            width: 190px;
+            max-width: 45vw;
+            height: auto;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 0 25px var(--blue-glow));
+            animation: markFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes markFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-12px); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: var(--cyber-blue);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--muted);
+            text-transform: uppercase;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* --------------------------------------------------
+           5. STICKY SCROLLYTELLING SECTION (500vh)
+        -------------------------------------------------- */
+        .scrolly-wrapper {
+            position: relative;
+            height: 500vh;
+        }
+
+        .scrolly-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        /* VERTICAL SIDE PROGRESS BAR (SIDE STRAIGHT LINE) */
+        .side-progress-container {
+            position: absolute;
+            left: 25px;
+            top: 15%;
+            bottom: 15%;
+            width: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        [dir="rtl"] .side-progress-container {
+            left: auto;
+            right: 25px;
+        }
+
+        .side-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--cyber-blue);
+            box-shadow: 0 0 15px var(--cyber-blue);
+            border-radius: 4px;
+            transition: height 0.1s linear, background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .scrolly-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* LEFT SIDE: Floating Glassmorphic Project Cards */
+        .cards-column {
+            position: relative;
+            height: 520px;
+        }
+
+        .mockup-card {
+            position: absolute;
+            inset: 0;
+            background: var(--liquid-glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid var(--glass-shine);
+            border-radius: 24px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(40px) scale(0.92);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .mockup-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .card-tag {
+            font-size: 11px;
+            color: var(--cyber-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .card-heading {
+            font-size: 24px;
+            margin: 10px 0;
+            color: var(--cream);
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .card-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 14px;
+            background: rgba(10, 132, 255, 0.1);
+            border: 1px solid rgba(10, 132, 255, 0.3);
+            color: var(--cyber-blue);
+            border-radius: 12px;
+            font-size: 11px;
+            align-self: flex-start;
+        }
+
+        /* RIGHT SIDE: Step List */
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step-panel {
+            opacity: 0.35;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+            padding: 18px 24px;
+            border-left: 3px solid transparent;
+            border-radius: 12px;
+        }
+
+        [dir="rtl"] .step-panel {
+            border-left: none;
+            border-right: 3px solid transparent;
+            transform: translateX(-20px);
+        }
+
+        .step-panel.active {
+            opacity: 1;
+            transform: translateX(0);
+            border-color: var(--cyber-blue);
+            background: linear-gradient(90deg, rgba(10,132,255,0.08) 0%, transparent 100%);
+        }
+
+        [dir="rtl"] .step-panel.active {
+            background: linear-gradient(-90deg, rgba(10,132,255,0.08) 0%, transparent 100%);
+        }
+
+        .step-num {
+            font-size: 12px;
+            color: var(--cyber-blue);
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 4px 0;
+        }
+
+        .step-subtext {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* --------------------------------------------------
+           6. CONTACT SECTION & HYPERLINK BUTTONS
+        -------------------------------------------------- */
+        .contact-section {
+            position: relative;
+            z-index: 2;
+            padding: 120px 20px;
+            background: var(--bg-dark);
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .contact-card {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 50px 30px;
+            background: var(--liquid-glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 0 50px rgba(10, 132, 255, 0.08);
+        }
+
+        .contact-name {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--cream);
+        }
+
+        .contact-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .icon-link-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .icon-link-btn:hover {
+            background: var(--cyber-blue);
+            color: #fff;
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 30px var(--blue-glow);
+            transform: translateY(-4px);
+        }
+
+        .icon-link-btn:active {
+            transform: scale(0.95) !important;
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+            background: #020202;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* --------------------------------------------------
+           7. RESPONSIVE DESIGN
+        -------------------------------------------------- */
+        @media (max-width: 900px) {
+            header { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .scrolly-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .cards-column { height: 380px; }
+            .mockup-card { padding: 25px; }
+            .side-progress-container { left: 10px; }
+            [dir="rtl"] .side-progress-container { right: 10px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="ambient-glow-1"></div>
-<div class="ambient-glow-2"></div>
-
-<!-- Navigation -->
-<nav class="nav">
-  <a href="index.html" class="brand">
-    <img src="logo.svg" alt="GROUP logo" width="40" height="40">
-    GROUP
-  </a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#projects" data-i18n="nav_projects">Work</a></li>
-      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-    </ul>
-    <div class="lang-switch">
-      <button class="lang-btn" id="langBtn">🌐 <span id="langLabel">EN</span></button>
-      <div class="lang-menu" id="langMenu"></div>
+    <!-- 1. SPLASH SCREEN (2 SECONDS) -->
+    <div id="splash-screen">
+        <div></div>
+        <div class="splash-center">
+            <img src="Logo_3.png" alt="AF LOGIC Logo" class="splash-logo">
+            <span class="splash-title-en">Simply Better Logic</span>
+            <span class="splash-title-ar">اجعل التكنولوجيا تعمل من أجلك</span>
+        </div>
+        <div class="splash-footer-text">
+            Simply Better Logic. Digital solutions engineered to make your business run smarter, faster,
+        </div>
     </div>
-  </div>
+
+    <!-- 2. HEADER NAVIGATION -->
+    <header>
+        <div class="brand-container">
+            <img src="Logo_3.png" alt="AF LOGIC" class="brand-logo-img">
+            <span class="brand-text">AF LOGIC</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero" data-en="MANIFESTO" data-ar="الرؤية">MANIFESTO</a></li>
+            <li><a href="#scrolly" data-en="SERVICES" data-ar="الخدمات">SERVICES</a></li>
+            <li><a href="#scrolly" data-en="PROCESS" data-ar="المراحل">PROCESS</a></li>
+            <li><a href="#contact" data-en="CONTACT" data-ar="التواصل">CONTACT</a></li>
+        </ul>
+        <div class="header-actions">
+            <button class="interactive-btn" id="lang-btn">AR</button>
+            <a href="#contact" class="interactive-btn cta-btn" data-en="CONTACT US" data-ar="تواصل معنا">CONTACT US</a>
+        </div>
+    </header>
+
+    <!-- 3. HERO START SECTION -->
+    <section class="hero-section" id="hero">
+        <img src="Logo_3.png" alt="Mark" class="hero-logo">
+        <h1 class="hero-title">AF LOGIC</h1>
+        <p class="hero-subtitle" data-en="Artistic Intelligence" data-ar="الذكاء والمنطق البرمجي">Artistic Intelligence</p>
+        <div class="scroll-indicator" data-en="SCROLL TO EXPLORE" data-ar="حرك الشاشة للأسفل">SCROLL TO EXPLORE</div>
+    </section>
+
+    <!-- 4. STICKY SCROLLYTELLING CONTAINER -->
+    <div class="scrolly-wrapper" id="scrolly">
+        <div class="scrolly-sticky">
+            
+            <!-- STRAIGHT VERTICAL PROGRESS BAR ON SIDE -->
+            <div class="side-progress-container">
+                <div class="side-progress-fill" id="progress-fill"></div>
+            </div>
+
+            <!-- Interactive 2-Column Content -->
+            <div class="scrolly-content">
+                
+                <!-- LEFT COLUMN: Dynamic Mockup Glass Cards -->
+                <div class="cards-column">
+                    
+                    <!-- Card 0: Manifesto -->
+                    <div class="mockup-card active" id="card-0">
+                        <span class="card-tag" data-en="01 // MANIFESTO" data-ar="01 // الرؤية والمنطق">01 // MANIFESTO</span>
+                        <h3 class="card-heading" data-en="Not generated. Directed." data-ar="ليست عشوائية. بل موجهة.">Not generated. Directed.</h3>
+                        <p class="card-desc" data-en="We use AI as artistic intelligence — not to taste, but to accelerate it. Every image, system, film, and digital experience is shaped by direction, not randomness." data-ar="نستخدم التكنولوجيا والذكاء الاصطناعي كمنطق تطويري موجه بدقة للوصول لأعلى كفاءة تشغيلية.">We use AI as artistic intelligence — not to taste, but to accelerate it. Every image, system, film, and digital experience is shaped by direction, not randomness.</p>
+                        <span class="card-badge" data-en="50+ Global Systems" data-ar="+50 نظام عالمي">50+ Global Systems</span>
+                    </div>
+
+                    <!-- Card 1: Services List -->
+                    <div class="mockup-card" id="card-1">
+                        <span class="card-tag" data-en="02 // SERVICES" data-ar="02 // الخدمات المتاحة">02 // SERVICES</span>
+                        <h3 class="card-heading" data-en="Engineering Capabilities" data-ar="القدرات الهندسية والبرمجية">Engineering Capabilities</h3>
+                        <p class="card-desc" data-en="• Direction & Systems Architecture&#10;• Custom Web & Native Mobile Development&#10;• Terminal Logistics & Inventory Architecture" data-ar="• معمارية الأنظمة والتوجيه&#10;• البرمجة الخاصة وتطبيقات الويب والماك&#10;• برمجيات الموانئ والمخازن المشفرة">
+                            • Direction & Systems Architecture<br>
+                            • Custom Web & Native App Development<br>
+                            • Terminal Logistics & Inventory Software
+                        </p>
+                        <span class="card-badge" data-en="Full-Stack Architecture" data-ar="تطوير شامل ومباشر">Full-Stack Architecture</span>
+                    </div>
+
+                    <!-- Card 2: Roster System -->
+                    <div class="mockup-card" id="card-2">
+                        <span class="card-tag">03 // PORT LOGISTICS</span>
+                        <h3 class="card-heading">Roster System</h3>
+                        <p class="card-desc" data-en="Terminal shift & operations management system built with Flutter & Firebase. Automated shift rotation for up to 10 crane teams with real-time handover logs, dynamic leave grid exclusions, and manual evaluation controls." data-ar="نظام إدارة عمليات وورديات الموانئ المحورية مبني بـ Flutter و Firebase. إدارة 10 فرق كرينات، استبعاد تلقائي للموظفين في الإجازات من شبكة الجدول، وتوثيق سجلات التسليم والتسلم.">
+                            Terminal shift & operations management system built with Flutter & Firebase. Managing up to 10 crane teams with automated handover logs & dynamic leave exclusions.
+                        </p>
+                        <span class="card-badge">Flutter / Dart / Firebase</span>
+                    </div>
+
+                    <!-- Card 3: Orvix System -->
+                    <div class="mockup-card" id="card-3">
+                        <span class="card-tag">04 // MACOS NATIVE</span>
+                        <h3 class="card-heading">Orvix Manager</h3>
+                        <p class="card-desc" data-en="macOS native storage architecture manager built with Swift & SwiftUI. Operates via low-level DiskArbitration kernel APIs to monitor drive performance, health metrics, and transfer speeds." data-ar="أداة نظام macOS متخصصة لمراقبة ومعالجة معمارية وسائط التخزين الداخلية والخارجية والتعامل المباشر مع نواة النظام بـ Swift & SwiftUI.">
+                            macOS native storage architecture manager built with Swift & SwiftUI. Low-level DiskArbitration kernel processing for drive monitoring.
+                        </p>
+                        <span class="card-badge">Swift / SwiftUI / Kernel</span>
+                    </div>
+
+                    <!-- Card 4: Hassan Nassar POS -->
+                    <div class="mockup-card" id="card-4">
+                        <span class="card-tag">05 // ENCRYPTED POS</span>
+                        <h3 class="card-heading">Hassan Nassar POS</h3>
+                        <p class="card-desc" data-en="Encrypted POS & gold inventory system built across 9 interconnected HTML files with encrypted LocalStorage, Firebase Authentication, live multi-device tracking, and Google Drive cloud backups." data-ar="نظام نقطة بيع ومخزون ذهب مشفر عبر 9 ملفات متكاملة لدعم العمل السريع والمحلي مع تتبع لحظي للجلسات والنسخ السحابي.">
+                            Encrypted POS & jewelry inventory system across 9 interconnected HTML architectures with live multi-device tracking & cloud backup.
+                        </p>
+                        <span class="card-badge">Encrypted / Firebase / Drive</span>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Step List -->
+                <div class="text-column">
+                    <div class="step-panel active" id="step-0">
+                        <span class="step-num">01</span>
+                        <h4 class="step-title" data-en="Manifesto" data-ar="الرؤية والمنطق">Manifesto</h4>
+                        <p class="step-subtext" data-en="Artistic intelligence & core philosophy." data-ar="الرؤية العامة وفلسفة التطوير.">Artistic intelligence & core philosophy.</p>
+                    </div>
+
+                    <div class="step-panel" id="step-1">
+                        <span class="step-num">02</span>
+                        <h4 class="step-title" data-en="Services & Capabilities" data-ar="الخدمات والقدرات">Services & Capabilities</h4>
+                        <p class="step-subtext" data-en="Architecture, Design & Native Engineering." data-ar="معمارية البرمجة والتصميم.">Architecture, Design & Native Engineering.</p>
+                    </div>
+
+                    <div class="step-panel" id="step-2">
+                        <span class="step-num">03</span>
+                        <h4 class="step-title">Roster Management</h4>
+                        <p class="step-subtext" data-en="Port & terminal shift automation system." data-ar="إدارة عمليات الموانئ والورديات.">Port & terminal shift automation system.</p>
+                    </div>
+
+                    <div class="step-panel" id="step-3">
+                        <span class="step-num">04</span>
+                        <h4 class="step-title">Orvix Architecture</h4>
+                        <p class="step-subtext" data-en="Native macOS low-level disk manager." data-ar="معالجة وسائط التخزين بنظام ماك.">Native macOS low-level disk manager.</p>
+                    </div>
+
+                    <div class="step-panel" id="step-4">
+                        <span class="step-num">05</span>
+                        <h4 class="step-title">Hassan Nassar POS</h4>
+                        <p class="step-subtext" data-en="Encrypted multi-device gold inventory network." data-ar="شبكة نقاط البيع والمخزون المشفرة.">Encrypted multi-device gold inventory network.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. CONTACT SECTION (HYPERLINKS ONLY - NO TEXT DATA DISPLAYED) -->
+    <section class="contact-section" id="contact">
+        <div class="contact-card">
+            <h2 class="contact-name">Abdullah Farouq</h2>
+            <div class="contact-actions">
+                <!-- Mail Link -->
+                <a href="mailto:Abdullah.Farouq87@yahoo.com" class="icon-link-btn" title="Email">
+                    <i data-lucide="mail"></i>
+                </a>
+                <!-- WhatsApp Link -->
+                <a href="https://wa.me/201061947000" target="_blank" class="icon-link-btn" title="WhatsApp">
+                    <i data-lucide="message-square"></i>
+                </a>
+                <!-- Direct Phone Link -->
+                <a href="tel:+201061947000" class="icon-link-btn" title="Call">
+                    <i data-lucide="phone"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer>
+        <p>&copy; <span id="year"></span> AF LOGIC. All rights reserved.</p>
+    </footer>
+
+    <!-- 7. JAVASCRIPT ENGINE -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // 1. Splash Screen Timer (Automatic 2 Seconds)
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            setTimeout(() => {
+                document.getElementById('splash-screen').classList.add('fade-out');
+            }, 2000);
+        });
+
+        // 2. Language Toggle Logic (EN / AR)
+        const langBtn = document.getElementById('lang-btn');
+        let currentLang = 'en';
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            langBtn.textContent = currentLang === 'en' ? 'AR' : 'EN';
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const targetText = el.getAttribute(`data-${currentLang}`);
+                if (targetText) {
+                    if (el.tagName === 'P' && targetText.includes('\n')) {
+                        el.innerHTML = targetText.replace(/\n/g, '<br>');
+                    } else {
+                        el.textContent = targetText;
+                    }
+                }
+            });
+        });
+
+        // 3. Mouse Magnet Effect
+        document.querySelectorAll('.interactive-btn, .icon-link-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+        // 4. Straight Line Progress & Scrollytelling Calculator
+        const scrollyWrapper = document.getElementById('scrolly');
+        const progressFill = document.getElementById('progress-fill');
+        const totalSteps = 5;
+
+        function updateScroll() {
+            const wrapperRect = scrollyWrapper.getBoundingClientRect();
+            const wrapperHeight = scrollyWrapper.clientHeight - window.innerHeight;
+            
+            let progress = -wrapperRect.top / wrapperHeight;
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Update Side Straight Progress Line Height
+            progressFill.style.height = `${progress * 100}%`;
+
+            // Dynamic Color Change based on Scroll Depth
+            if (progress > 0.5) {
+                progressFill.style.backgroundColor = 'var(--neon-red)';
+                progressFill.style.boxShadow = '0 0 15px var(--neon-red)';
+            } else {
+                progressFill.style.backgroundColor = 'var(--cyber-blue)';
+                progressFill.style.boxShadow = '0 0 15px var(--cyber-blue)';
+            }
+
+            // Activate Step & Card based on progress
+            const currentStep = Math.min(
+                totalSteps - 1,
+                Math.floor(progress * totalSteps)
+            );
+
+            for (let i = 0; i < totalSteps; i++) {
+                const card = document.getElementById(`card-${i}`);
+                const step = document.getElementById(`step-${i}`);
+
+                if (i === currentStep) {
+                    card.classList.add('active');
+                    step.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                    step.classList.remove('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(updateScroll);
+        });
+    </script>
+</body>
+</html>  </div>
 </nav>
 
 <main>
